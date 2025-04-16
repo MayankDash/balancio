@@ -2,12 +2,17 @@
 .main-content {
   display: flex;
   height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #f8f9fa; /* Light background */
 }
 
 .sidebar {
-  width: 200px;
-  background-color: #4056f4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  z-index: 10;
+  background-color: #4056f4; /* Keep the blue sidebar */
   color: white;
   padding: 20px;
 }
@@ -29,46 +34,179 @@
 }
 
 .content-container {
-  margin-left: 0;
+  margin-left: 20px; /* Match sidebar width */
   padding: 20px;
   flex-grow: 1;
+  overflow-y: auto;
+  background-color: #f8f9fa; /* Light background */
+  min-height: 100vh;
 }
 
 .feature-title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #333;
+  color: #333; /* Dark text */
   font-weight: 500;
 }
 
 .feature-display {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  width: calc(100% - 40px); /* Subtract padding */
+  max-width: 1200px; /* Add max-width for larger screens */
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #eaeaea;
 }
 
-/* Visualization Selector Styles */
+.no-data-message {
+  text-align: center;
+  padding: 40px;
+  background: #fafafa;
+  color: #666;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.no-data-message p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.visualization-container {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.chart-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  width: 100%;
+  min-height: 450px;
+  border: 1px solid #eaeaea;
+}
+
+.chart-title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  font-size: 24px;
+  color: #333;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Update visualization selector */
 .visualization-selector {
   display: flex;
-  gap: 10px;
-  margin: 15px 0;
-  padding: 10px 0;
-  border-bottom: 1px solid #eaeaea;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.visualization-selector button {
-  padding: 6px 12px;
-  background-color: #f1f3f5;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
+.visualization-selector .selector-label {
+  font-weight: 500;
+  color: #333;
+  font-size: 15px;
+}
+
+.visualization-selector select {
+  min-width: 180px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #333;
+  background-color: #f8fafc;
   cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  transition: all 0.2s ease;
 }
 
-.visualization-selector button.active {
-  background-color: #4056f4;
+.visualization-selector select:hover {
+  border-color: #cbd5e1;
+  background-color: #f1f5f9;
+}
+
+.visualization-selector select:focus {
+  outline: none;
+  border-color: #4056f4;
+  box-shadow: 0 0 0 3px rgba(64, 86, 244, 0.1);
+}
+
+.visualization-selector .chart-options {
+  display: flex;
+  gap: 8px;
+}
+
+.visualization-selector .chart-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  color: #4a5568;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.visualization-selector .chart-option:hover {
+  background: #f7fafc;
+  border-color: #cbd5e1;
+}
+
+.visualization-selector .chart-option.active {
+  background: #4056f4;
   color: white;
   border-color: #4056f4;
+}
+
+.visualization-selector .chart-option svg {
+  stroke-width: 2px;
 }
 
 /* Data Uploader Styles */
@@ -90,5 +228,229 @@
 }
 
 .data-uploader label:hover {
+  background-color: #3046d4;
+}
+
+/* Update scrollbar for light theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Dashboard Overview specific styles */
+.dashboard-overview {
+  background: white;
+  color: #333;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eaeaea;
+  padding: 24px;
+}
+
+/* Fix any dark background elements */
+.card, 
+.panel, 
+.overview-section, 
+.dashboard-card,
+.summary-card {
+  background: white;
+  color: #333;
+  border: 1px solid #eaeaea;
+}
+
+/* Make sure all chart backgrounds are correct */
+.recharts-surface,
+.chart-container {
+  background-color: transparent !important;
+}
+
+/* Fix text colors in charts */
+.recharts-text,
+.recharts-cartesian-axis-tick-value,
+.recharts-legend-item-text {
+  fill: #666 !important;
+}
+
+/* Make sure chart titles are visible */
+.chart-title {
+  color: #333 !important;
+}
+
+/* Override any dark backgrounds */
+[class*="card"],
+[class*="panel"],
+[class*="container"],
+[class*="section"] {
+  background-color: white !important;
+}
+
+/* Fix any Bootstrap containers */
+.container, 
+.container-fluid {
+  background-color: transparent !important;
+}
+
+/* Replace the dark theme dashboard styles with these light theme versions */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eaeaea;
+}
+
+.dashboard-card h3 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.dashboard-overview .stats-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.dashboard-overview .stat-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eaeaea;
+}
+
+.dashboard-overview .stat-card h3 {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.dashboard-overview .stat-card p {
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Chart styles for light theme */
+.recharts-text {
+  fill: #666 !important;
+}
+
+.recharts-legend-item-text {
+  color: #666 !important;
+}
+
+.recharts-cartesian-axis-line,
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #eaeaea !important;
+}
+
+.custom-tooltip {
+  background: white;
+  padding: 12px;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.custom-tooltip .category {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.custom-tooltip .amount {
+  margin: 4px 0 0 0;
+  color: #666;
+}
+
+.custom-tooltip .percent {
+  margin: 4px 0 0 0;
+  color: #888;
+  font-size: 0.9em;
+}
+
+/* Notification styles */
+.notification-header {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.notification-header h2 {
+  color: #333;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.notification-description {
+  color: #666;
+  line-height: 1.5;
+}
+
+.notification-description ul {
+  margin-top: 12px;
+  margin-left: 20px;
+}
+
+.notification-description li {
+  margin-bottom: 8px;
+  color: #4a5568;
+}
+
+/* Add to MainContent.css */
+.upload-section {
+  margin-bottom: 24px;
+}
+
+/* Remove any additional visualization containers that might appear above the grid */
+.visualization-container:not(.dashboard-grid *) {
+  display: none;
+}
+
+/* Add or update in MainContent.css */
+.data-upload {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.file-input {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4056f4;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.file-input:hover {
   background-color: #3046d4;
 }

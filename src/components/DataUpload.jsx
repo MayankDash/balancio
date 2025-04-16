@@ -25,7 +25,12 @@ const DataUploader = ({ onDataParsed }) => {
   return (
     <div className="data-upload" style={{ padding: "2rem" }}>
       <h3>Upload Financial CSV File</h3>
-      <input type="file" accept=".csv" onChange={handleFileUpload} />
+      <input 
+        type="file" 
+        accept=".csv" 
+        onChange={handleFileUpload}
+        className="file-input"
+      />
       {csvData.length > 0 && <Visualization data={csvData} />}
     </div>
   );

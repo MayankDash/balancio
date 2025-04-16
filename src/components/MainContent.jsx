@@ -10,29 +10,74 @@ import DataUploader from "./DataUpload";
 import Sidebar from "./Sidebar";
 import VisualizationSelector from "./VisualizationSelector";
 import "../styles/MainContent.css";
+import AIAssistant from './features/AIAssistant';
 
 const MainContent = () => {
   const [data, setData] = useState([]);
-  const [selectedFeature, setSelectedFeature] = useState("dashboard");
+  const [selectedFeature, setSelectedFeature] = useState(null);
   const [selectedChart, setSelectedChart] = useState("bar");
 
   const handleDataParsed = (parsedData) => {
     setData(parsedData);
+    setSelectedFeature("dashboard"); // Automatically switch to dashboard after upload
   };
 
   const renderFeature = () => {
-    const featureProps = { data, selectedChart };
+    const featureProps = {
+      data,
+      selectedChart,
+      setSelectedChart
+    };
+
+    // Only show upload section if no data
+    if (data.length === 0) {
+      return (
+        <div className="upload-section">
+          <DataUploader onDataParsed={handleDataParsed} />
+        </div>
+      );
+    }
+
     switch (selectedFeature) {
+      case "dashboard":
+        return <DashboardHome data={data} />;
       case "bookkeeping":
-        return <Bookkeeping {...featureProps} />;
+        return (
+          <div className="feature-display">
+            <VisualizationSelector selectedChart={selectedChart} setSelectedChart={setSelectedChart} />
+            <Bookkeeping {...featureProps} />
+          </div>
+        );
       case "tax":
-        return <TaxCompliance {...featureProps} />;
+        return (
+          <div className="feature-display">
+            <VisualizationSelector selectedChart={selectedChart} setSelectedChart={setSelectedChart} />
+            <TaxCompliance {...featureProps} />
+          </div>
+        );
       case "cashflow":
-        return <CashFlow {...featureProps} />;
+        return (
+          <div className="feature-display">
+            <VisualizationSelector selectedChart={selectedChart} setSelectedChart={setSelectedChart} />
+            <CashFlow {...featureProps} />
+          </div>
+        );
       case "notifications":
-        return <Notifications {...featureProps} />;
+        return (
+          <div className="feature-display">
+            <VisualizationSelector selectedChart={selectedChart} setSelectedChart={setSelectedChart} />
+            <Notifications {...featureProps} />
+          </div>
+        );
       case "expenses":
-        return <ExpenseTracking {...featureProps} />;
+        return (
+          <div className="feature-display">
+            <VisualizationSelector selectedChart={selectedChart} setSelectedChart={setSelectedChart} />
+            <ExpenseTracking {...featureProps} />
+          </div>
+        );
+      case "aiassistant":
+        return <AIAssistant />;
       default:
         return <DashboardHome data={data} />;
     }
@@ -42,27 +87,30 @@ const MainContent = () => {
     <div className="main-content">
       <Sidebar setSelectedFeature={setSelectedFeature} />
       <div className="content-container">
-        <h1 className="feature-title">
-          {selectedFeature === "dashboard"
-            ? "Dashboard Overview"
-            : selectedFeature === "bookkeeping"
-            ? "Bookkeeping"
-            : selectedFeature === "tax"
-            ? "Tax Compliance"
-            : selectedFeature === "cashflow"
-            ? "Cash Flow"
-            : selectedFeature === "notifications"
-            ? "Notifications"
-            : "Expense Tracking"}
-        </h1>
-        <DataUploader onDataParsed={handleDataParsed} />
-        {selectedFeature !== "dashboard" && (
-          <VisualizationSelector
-            selectedChart={selectedChart}
-            setSelectedChart={setSelectedChart}
-          />
+        {data.length === 0 ? (
+          <div className="welcome-message">
+            <h1>Welcome to Balancio</h1>
+            <p>Please upload your financial data to get started</p>
+            <DataUploader onDataParsed={handleDataParsed} />
+          </div>
+        ) : (
+          <>
+            <h1 className="feature-title">
+              {selectedFeature === "dashboard"
+                ? "Dashboard Overview"
+                : selectedFeature === "bookkeeping"
+                ? "Bookkeeping"
+                : selectedFeature === "tax"
+                ? "Tax Compliance"
+                : selectedFeature === "cashflow"
+                ? "Cash Flow"
+                : selectedFeature === "expenses"
+                ? "Expense Tracking"
+                : "BalanceGPT Assistant"}
+            </h1>
+            {renderFeature()}
+          </>
         )}
-        <div className="feature-display">{renderFeature()}</div>
       </div>
     </div>
   );

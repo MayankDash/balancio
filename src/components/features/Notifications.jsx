@@ -2,6 +2,8 @@ import React from "react";
 import {
   BarChart,
   Bar,
+  LineChart,
+  Line,
   PieChart,
   Pie,
   Cell,
@@ -11,6 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { AlertTriangle, AlertCircle, Info } from "react-feather"; // Add icons for priority levels
 
 const COLORS = [
   "#8884d8",
@@ -19,11 +22,9 @@ const COLORS = [
   "#ff8042",
   "#8dd1e1",
   "#a4de6c",
-  "#d0ed57",
-  "#d88884",
 ];
 
-const Notifications = ({ data, selectedChart }) => {
+const Notifications = ({ data, selectedChart, setSelectedChart }) => { // Add setSelectedChart to props
   const alertCounts = data.reduce((acc, item) => {
     const type = item.AlertType || "Unknown";
     acc[type] = (acc[type] || 0) + 1;
@@ -39,7 +40,7 @@ const Notifications = ({ data, selectedChart }) => {
     switch (selectedChart) {
       case "bar":
         return (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={400}>
             <BarChart data={chartData}>
               <XAxis dataKey="name" />
               <YAxis />
@@ -49,9 +50,21 @@ const Notifications = ({ data, selectedChart }) => {
             </BarChart>
           </ResponsiveContainer>
         );
+      case "line":
+        return (
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart data={chartData}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="amount" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        );
       case "pie":
         return (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie
                 data={chartData}
@@ -59,7 +72,8 @@ const Notifications = ({ data, selectedChart }) => {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                outerRadius={100}
+                outerRadius={150}
+                fill="#8884d8"
                 label
               >
                 {chartData.map((entry, index) => (
@@ -80,14 +94,50 @@ const Notifications = ({ data, selectedChart }) => {
   };
 
   return (
-    <div>
-      <h2>Notifications</h2>
-      {chartData.map(({ name, amount }) => (
-        <p key={name}>
-          {name}: {amount}
+    <div className="feature-display">
+      <div className="notification-header">
+        <h2>Notifications & Alerts</h2>
+        <div className="priority-legend">
+          <div className="priority-item high">
+            <AlertTriangle size={16} />
+            <span>High Priority</span>
+            <p>Urgent attention needed (e.g., large unusual transactions, overdue tax payments)</p>
+          </div>
+          <div className="priority-item medium">
+            <AlertCircle size={16} />
+            <span>Medium Priority</span>
+            <p>Important but not urgent (e.g., approaching budget limits, upcoming deadlines)</p>
+          </div>
+          <div className="priority-item low">
+            <Info size={16} />
+            <span>Low Priority</span>
+            <p>General information (e.g., monthly summaries, minor spending pattern changes)</p>
+          </div>
+        </div>
+        <p className="notification-description">
+          Track important financial events and deadlines. This feature highlights:
+          <ul>
+            <li>Upcoming tax payment deadlines</li>
+            <li>Unusual spending patterns</li>
+            <li>Large transactions</li>
+            <li>Budget threshold alerts</li>
+          </ul>
         </p>
-      ))}
-      {data.length > 0 ? renderChart() : <p>No data to display.</p>}
+      </div>
+
+      <VisualizationSelector 
+        selectedChart={selectedChart}
+        setSelectedChart={setSelectedChart}
+      />
+
+      <div className="chart-section">
+        {chartData.map(({ name, amount }) => (
+          <p key={name}>
+            {name}: {amount}
+          </p>
+        ))}
+        {data.length > 0 ? renderChart() : <p>No data to display.</p>}
+      </div>
     </div>
   );
 };
