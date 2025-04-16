@@ -1,12 +1,13 @@
-/* src/components/MainContent.css */
+/* src/styles/MainContent.css */
 .main-content {
   display: flex;
   height: 100vh;
+  background-color: #f8f9fa;
 }
 
 .sidebar {
   width: 200px;
-  background-color: #333;
+  background-color: #4056f4;
   color: white;
   padding: 20px;
 }
@@ -14,19 +15,80 @@
 .sidebar button {
   width: 100%;
   padding: 10px;
-  background-color: #444;
+  background-color: rgba(255, 255, 255, 0.1);
   border: none;
   color: white;
   cursor: pointer;
   margin: 10px 0;
+  border-radius: 4px;
+  text-align: left;
 }
 
 .sidebar button:hover {
-  background-color: #555;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .content-container {
-  margin-left: 250px; /* Adjust the margin to the width of the sidebar */
+  margin-left: 0;
   padding: 20px;
   flex-grow: 1;
+}
+
+.feature-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 500;
+}
+
+.feature-display {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Visualization Selector Styles */
+.visualization-selector {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.visualization-selector button {
+  padding: 6px 12px;
+  background-color: #f1f3f5;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.visualization-selector button.active {
+  background-color: #4056f4;
+  color: white;
+  border-color: #4056f4;
+}
+
+/* Data Uploader Styles */
+.data-uploader {
+  margin-bottom: 15px;
+}
+
+.data-uploader input {
+  display: none;
+}
+
+.data-uploader label {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4056f4;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.data-uploader label:hover {
+  background-color: #3046d4;
 }

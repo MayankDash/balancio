@@ -1,33 +1,29 @@
-// src/components/features/DashboardHome.jsx
+// src/features/DashboardHome.jsx
 import React from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 
 const DashboardHome = ({ data }) => {
+  const totalIncome = data.reduce((sum, row) => {
+    const income = parseFloat(row.Income || 0);
+    return sum + (isNaN(income) ? 0 : income);
+  }, 0);
+
+  const totalExpense = data.reduce((sum, row) => {
+    const expense = parseFloat(row.Expense || 0);
+    return sum + (isNaN(expense) ? 0 : expense);
+  }, 0);
+
   return (
     <div>
       <h2>Dashboard Overview</h2>
-      {data.length === 0 ? (
-        <p>No data available. Please upload a CSV file.</p>
-      ) : (
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="income" fill="#4CAF50" />
-            <Bar dataKey="expenses" fill="#F44336" />
-          </BarChart>
-        </ResponsiveContainer>
-      )}
+      <p>
+        <strong>Total Income:</strong> ₹{totalIncome.toFixed(2)}
+      </p>
+      <p>
+        <strong>Total Expenses:</strong> ₹{totalExpense.toFixed(2)}
+      </p>
+      <p>
+        <strong>Net:</strong> ₹{(totalIncome - totalExpense).toFixed(2)}
+      </p>
     </div>
   );
 };

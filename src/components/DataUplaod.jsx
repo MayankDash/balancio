@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import Papa from "papaparse";
-import "./MainContent.css";
 
 const DataUpload = ({ onDataParsed }) => {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
+
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
-      complete: function (results) {
-        onDataParsed(results.data); // Pass parsed data to parent
+      complete: (results) => {
+        const data = results.data.filter((row) =>
+          Object.values(row).some((cell) => cell !== "")
+        );
+        onDataParsed(data);
       },
     });
   };
 
   return (
-    <div className="upload-section">
-      <h3>📄 Upload Company CSV</h3>
+    <div className="data-upload">
+      <h3>Upload CSV File</h3>
       <input type="file" accept=".csv" onChange={handleFileUpload} />
     </div>
   );
