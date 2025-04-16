@@ -1,0 +1,70 @@
+/* src/styles/Sidebar.css */
+
+/* Sidebar container */
+.sidebar {
+  width: 260px; /* Fixed width for the sidebar */
+  background-color: #3858f6; /* Sidebar background color */
+  color: white; /* White text */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full height of the screen */
+  position: fixed; /* Fixed position on the left */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+div.sidebar {
+  background-color: #2d4eff; /* Replace with the main blue color */
+}
+
+/* Logo styling */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  text-align: center;
+  color: white; /* White text for the logo */
+}
+
+/* Menu styling */
+.menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between menu items */
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners for each menu item */
+  transition: background 0.2s ease; /* Smooth transition for hover effect */
+}
+
+.menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+}
+
+/* Logout button styling */
+.logout {
+  margin-top: auto; /* Push logout button to the bottom */
+  color: #ffcdcd; /* Soft red color for the logout text */
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Make sure sidebar is properly styled when active */
+.sidebar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}

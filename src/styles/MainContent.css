@@ -1,0 +1,32 @@
+/* src/components/MainContent.css */
+.main-content {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 10px;
+  background-color: #444;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.sidebar button:hover {
+  background-color: #555;
+}
+
+.content-container {
+  margin-left: 250px; /* Adjust the margin to the width of the sidebar */
+  padding: 20px;
+  flex-grow: 1;
+}

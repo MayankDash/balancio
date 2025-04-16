@@ -1,0 +1,117 @@
+/* LandingPage.css */
+
+.landing {
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #2d4eff, #6a82fb);
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.cta-button {
+  background-color: #fff;
+  color: #2d4eff;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #f0f0f0;
+}
+
+.about,
+.features,
+.cta-section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about h2,
+.features h2,
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.about p,
+.cta-section p {
+  font-size: 1.15rem;
+  color: #555;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Feature Grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background-color: #ffffff;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: #2d4eff;
+}
+
+.feature-card p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.cta-section {
+  background-color: #f8f9ff;
+  padding: 100px 20px;
+}
+
+.cta-secondary {
+  margin-top: 20px;
+  background-color: #2d4eff;
+  color: white;
+}
+
+.cta-secondary:hover {
+  background-color: #1c3fdc;
+}
