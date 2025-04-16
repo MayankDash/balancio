@@ -1,0 +1,263 @@
+.ai-chat-container {
+  display: flex;
+  height: 100vh;
+  background: #ffffff;
+}
+
+.ai-sidebar {
+  width: 260px;
+  background: #f7f7f8;
+  border-right: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.new-chat-btn {
+  width: 100%;
+  padding: 8px 16px;
+  background: #4056f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-chat-btn:hover {
+  background: #3046d4;
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.chat-item {
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-item:hover {
+  background: #e5e5e5;
+}
+
+.chat-item.active {
+  background: #e5e5e5;
+}
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.settings-btn {
+  width: 100%;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.settings-btn:hover {
+  background: #f0f0f0;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 260px);
+}
+
+.chat-header {
+  padding: 16px 32px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.chat-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  margin-top: 40px;
+}
+
+.message {
+  max-width: 80%;
+}
+
+.message.assistant {
+  align-self: flex-start;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message-content {
+  display: flex;
+  gap: 12px;
+  padding: 1em;
+  border-radius: 12px;
+  background: #f7f7f8;
+  margin: 0.5em 0;
+}
+
+.message.assistant .message-content {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+.message.user .message-content {
+  background: #e7f1ff;
+  border: 1px solid #cce5ff;
+}
+
+.message-avatar {
+  font-size: 24px;
+}
+
+.message-text {
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.message-text.loading {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  animation: bounce 1.4s infinite;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.input-footer {
+  padding: 24px 32px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.input-container {
+  display: flex;
+  gap: 12px;
+  background: #f7f7f8;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.input-container textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  resize: none;
+  padding: 8px;
+  font-size: 1rem;
+  outline: none;
+  max-height: 200px;
+}
+
+.upload-btn, .send-btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: background-color 0.2s;
+}
+
+.upload-btn:hover, .send-btn:hover {
+  background: #e5e5e5;
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.markdown-h1 {
+  font-size: 1.8em;
+  margin: 1em 0 0.5em;
+  color: #333;
+}
+
+.markdown-h2 {
+  font-size: 1.5em;
+  margin: 1em 0 0.5em;
+  color: #444;
+}
+
+.markdown-h3 {
+  font-size: 1.2em;
+  margin: 1em 0 0.5em;
+  color: #555;
+}
+
+.markdown-p {
+  margin: 0.8em 0;
+}
+
+.markdown-ul {
+  margin: 0.8em 0;
+  padding-left: 1.5em;
+}
+
+.markdown-li {
+  margin: 0.3em 0;
+}
+
+.markdown-code {
+  background: #f4f4f4;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.markdown-pre {
+  background: #f4f4f4;
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 1em 0;
+}

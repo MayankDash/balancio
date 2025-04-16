@@ -1,25 +1,34 @@
 // src/components/VisualizationSelector.jsx
 import React from "react";
+import { BarChart2, PieChart, TrendingUp } from "react-feather"; // Import icons
 
 const VisualizationSelector = ({ selectedChart, setSelectedChart }) => {
   return (
-    <div className="visualization-selector" style={{ margin: "1rem 0" }}>
-      <label
-        htmlFor="chart-type"
-        style={{ marginRight: "1rem", fontWeight: "bold" }}
-      >
-        Select Chart Type:
-      </label>
-      <select
-        id="chart-type"
-        value={selectedChart}
-        onChange={(e) => setSelectedChart(e.target.value)}
-        style={{ padding: "0.5rem", borderRadius: "6px" }}
-      >
-        <option value="bar">Bar Chart</option>
-        <option value="pie">Pie Chart</option>
-        <option value="line">Line Chart</option>
-      </select>
+    <div className="visualization-selector">
+      <span className="selector-label">Visualization Type</span>
+      <div className="chart-options" role="group" aria-label="Chart type selection">
+        <button
+          type="button"
+          className={`chart-option ${selectedChart === 'bar' ? 'active' : ''}`}
+          onClick={() => setSelectedChart('bar')}
+        >
+          Bar Chart
+        </button>
+        <button
+          type="button"
+          className={`chart-option ${selectedChart === 'pie' ? 'active' : ''}`}
+          onClick={() => setSelectedChart('pie')}
+        >
+          Pie Chart
+        </button>
+        <button
+          type="button"
+          className={`chart-option ${selectedChart === 'line' ? 'active' : ''}`}
+          onClick={() => setSelectedChart('line')}
+        >
+          Line Chart
+        </button>
+      </div>
     </div>
   );
 };
